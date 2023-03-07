@@ -11,7 +11,7 @@ def main():
     microphone = sr.Microphone(config.microphone_index)
 
     with microphone as source:
-        recognizer.adjust_for_ambient_noise(source)
+        recognizer.adjust_for_ambient_noise(source, duration=2)
         print("Listening...")
 
     background = recognizer.listen_in_background(microphone, callback)
