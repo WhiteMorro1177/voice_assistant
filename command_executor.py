@@ -1,8 +1,14 @@
+
+
 class CommandExecutor():
 
-    def __init__(self, command):
-        self.cmd = command
+    def execute(self, command):
+        if (command == "time"):
+            # show time
+            pass
+        elif (command == "open"):
 
-    def execute(self):
+
+
+    def execute_time(command):
         pass
-
