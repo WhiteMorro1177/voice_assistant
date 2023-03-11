@@ -17,3 +17,5 @@ options = {
     },
 }
 
+# 1 | "bot" | "alias" | ""
+# 2 | "открой" | "cmd" | "open"
