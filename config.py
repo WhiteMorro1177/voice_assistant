@@ -1,15 +1,19 @@
 microphone_index = 1
 
+apps = {  # applications, that bot can execute
+    "браузер" : "firefox.exe",
+    "файлы" : "explorer.exe"
+}
+
 options = {
-    "alias": {"григорий", "гриша", "григ"},  # assistant names
-    "tbr": {"скажи", "покажи", "подскажи", "напомни"},  # to be remove
+    "alias": {"григорий", "гриша", "григ", "бот"},  # assistant names
     "cmd": {  # assistant recognizable commands
         "time": {"сколько время", "который час"},
-        "open": {"открой", "запусти"},
-        "browse": {"найди", "загугли"}
+        "open": {
+            "cmd_name": {"открой", "запусти"},
+            "app": apps,
+        },
+        "browse": {"найди", "загугли"},
     },
 }
 
-apps = {  # applications, that bot can execute
-    # TODO(think about running applications)
-}
