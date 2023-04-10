@@ -2,7 +2,6 @@ import speech_recognition as sr
 
 from recognizer import Recognizer
 from command_executor import CommandExecutor
-import config
 import time
 
 ALIAS_TAG = "alias"
@@ -13,7 +12,7 @@ class Listener():
 
     def listen(self):
         speech_recognizer = sr.Recognizer()
-        microphone = sr.Microphone(config.microphone_index)
+        microphone = sr.Microphone(1)
 
         with microphone as source:
             speech_recognizer.adjust_for_ambient_noise(source, duration=2)

@@ -1,6 +1,7 @@
 from fuzzywuzzy import process
-import config
 import os
+
+# rewrite with database
 
 files = os.listdir("D:\\Programs\\py\\voice_assistant\\")
 
