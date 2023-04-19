@@ -1,35 +1,43 @@
 import sqlite3 as sql
 
+DB_PATH = "data\\voice_assistant.db"
 
-class Database():
 
-    DB_PATH = "data\\voice_assistant.db"
 
+def select_option(tag: str):
+    return Database.select_option(Database, tag)
+
+def select_all_options():
+    return Database.select_all_options(Database)
+
+def select_app(tag: str):
+    return Database.select_app(Database, tag)
+
+def select_all_apps():
+    return Database.select_all_apps(Database)
+class Database:
+    
     OPTIONS_TABLE_NAME = "options"
     OPTION_TAG = "option_tag"
 
     APPS_TABLE_NAME = "apps"
     APP_TAG = "tag"
 
-
-    def get_cursor(self) -> sql.Cursor:
-        return sql.connect(self.DB_PATH).cursor()
-
-    # "options" table
-    def select_option(self, tag: str): # select one record from "option" table by tag
+    def get_cursor() -> sql.Cursor:
+        return sql.connect(DB_PATH).cursor()
+    
+    def select_option(self, tag: str):  # select one record from "option" table by tag
         cursor = self.get_cursor()
         result_set = cursor.execute(f"select * from {self.OPTIONS_TABLE_NAME} where {self.OPTION_TAG} = '{tag}'").fetchall()
         cursor.close()
         return result_set
 
-    def select_all_options(self): # select all records from "options"
+    def select_all_options(self):  # select all records from "options"
         cursor = self.get_cursor()
         result_set = cursor.execute(f"select * from {self.OPTIONS_TABLE_NAME}").fetchall()
         cursor.close()
         return result_set
-            
-    
-    # "apps" table
+
     def select_app(self, tag: str):
         cursor = self.get_cursor()
         result_set = cursor.execute(f"select * from {self.APPS_TABLE_NAME} where {self.APP_TAG} = '{tag}'").fetchall()
@@ -41,8 +49,6 @@ class Database():
         result_set = cursor.execute(f"select * from {self.APPS_TABLE_NAME}").fetchall()
         cursor.close()
         return result_set
-
-
 
     ''' for configuration mode (if i start working on it)
     
