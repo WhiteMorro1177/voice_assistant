@@ -37,21 +37,3 @@ process_result_commands = process.extract(input_command, commands)
 
 print(process_result_aliases)
 print(process_result_commands)
-
-
-'''
-cfg = config.options
-phrase_extraction = dict()
-
-for option in config.options:
-    phrase_extraction[option] = process.extractOne(cmd, cfg[option])
-
-
-final_cmd = process.extractOne(cmd, phrase_extraction["cmd"][0])
-if (final_cmd[1] > 50):
-    if (final_cmd[0] in cfg["cmd"]["time"]):
-        print("Time: ")
-        #  TODO(Show system time)
-
-
-'''
