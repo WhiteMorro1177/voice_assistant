@@ -1,18 +1,11 @@
 import os
-import subprocess
+import webbrowser
 
-import pyttsx3 as tts
+from speaker import *
 import datetime
 import database
 
 from fuzzywuzzy import process
-
-
-def speak(text):
-    voice_engine = tts.init()
-    voice_engine.say(text)
-    voice_engine.runAndWait()
-    voice_engine.stop()
 
 
 def execute_time():
@@ -29,9 +22,31 @@ def execute_open(command: str):
     app_to_open = process.extractOne(command, apps_names)[0]
     speak(f"Открываю {app_to_open}")
     os.startfile(apps_with_paths[app_to_open])
-    
+
+def execute_find(request: str):
+    request = request.lower()
+    to_be_remove = []
+    for select_result in database.select_all_options():
+        '''
+            select_result[0] - id
+            select_result[1] - name
+            select_result[2] - option tag
+            select_result[3] - command type tag
+        '''
+
+        if ("alias" == select_result[2]):
+            to_be_remove.append(select_result[1])
+        if ("browse" == select_result[3]):
+            to_be_remove.append(select_result[1])
+
+    for cmd in to_be_remove:
+        if (cmd in request):
+            request = request.replace(cmd, "")
+
+    webbrowser.open_new_tab(f"https://www.google.com/search?q={request.strip().replace(' ', '+')}")
+
 def execute_stop():
-    speak("Не могу остановиться")
+    speak("Всего хорошего, мастер")
 
 
 class CommandExecutor():
@@ -40,8 +55,9 @@ class CommandExecutor():
         if ("time" in command.keys()):
             execute_time()
         elif ("open" in command.keys()):
-            print(command)
             execute_open(command["input_text"])
+        elif ("browse" in command.keys()):
+            execute_find(command["input_text"])
         elif ("stop" in command.keys()):
             execute_stop()
         else:

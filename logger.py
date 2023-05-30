@@ -1,5 +1,4 @@
 import datetime
-import os
 
 class Logger():
     path = "E:\\Programming\\Ever\\py\\voice_assistant\\data\\log.txt"

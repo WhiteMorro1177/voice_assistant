@@ -1,6 +1,6 @@
-import listener
+from listener import *
 
 def main():
-    listener.Listener().listen()
+    Listener().listen()
 
 if __name__ == "__main__": main()

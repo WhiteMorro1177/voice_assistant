@@ -1,6 +1,7 @@
 import speech_recognition as sr
 
-import recognizer
+from speaker import *
+from recognizer import *
 import time
 
 class Listener():
@@ -11,7 +12,7 @@ class Listener():
 
         with microphone as source:
             speech_recognizer.adjust_for_ambient_noise(source, duration=2)
-            print("Listening...")
+            speak("Слушаю, мастер")
 
         background = speech_recognizer.listen_in_background(microphone, callback)
         while True: time.sleep(0.1)
@@ -22,7 +23,7 @@ def callback(speech_recognizer: sr.Recognizer, source: sr.Microphone):
         voice_to_text = speech_recognizer.recognize_google(source, language="ru-RU")
         print("Распознано: " + voice_to_text)
 
-        r = recognizer.Recognizer()
+        r = Recognizer()
         if (r.recognize(voice_to_text, "alias")):
             r.recognize(voice_to_text, "cmd")
 
